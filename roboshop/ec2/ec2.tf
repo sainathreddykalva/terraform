@@ -16,19 +16,19 @@ resource "time_sleep" "wait" {
   depends_on          = [aws_spot_instance_request.cheap_worker]
   create_duration     = "120s"
 }
-
-resource "aws_ec2_tag" "spot" {
-  count               = length(var.COMPONENTS)
-  resource_id         = element(aws_spot_instance_request.cheap_worker.*.spot_instance_id, count.index)
-  key                 = "Name"
-  value               = element(var.COMPONENTS, count.index)
-}
-
-resource "aws_route53_record" "dns" {
-  count               = length(var.COMPONENTS)
-  zone_id             = "Z05564902CXVMD9UGH7W1"
-  name                = "${element(var.COMPONENTS, count.index)}.roboshop.internal"
-  type                = "A"
-  ttl                 = "300"
-  records             = [element(aws_spot_instance_request.cheap_worker.*.private_ip, count.index)]
-}
+//
+//resource "aws_ec2_tag" "spot" {
+//  count               = length(var.COMPONENTS)
+//  resource_id         = element(aws_spot_instance_request.cheap_worker.*.spot_instance_id, count.index)
+//  key                 = "Name"
+//  value               = element(var.COMPONENTS, count.index)
+//}
+//
+//resource "aws_route53_record" "dns" {
+//  count               = length(var.COMPONENTS)
+//  zone_id             = "Z05564902CXVMD9UGH7W1"
+//  name                = "${element(var.COMPONENTS, count.index)}.roboshop.internal"
+//  type                = "A"
+//  ttl                 = "300"
+//  records             = [element(aws_spot_instance_request.cheap_worker.*.private_ip, count.index)]
+//}
