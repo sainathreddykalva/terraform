@@ -24,6 +24,13 @@ resource "aws_ec2_tag" "spot" {
   value               = element(var.COMPONENTS, count.index)
 }
 
+resource "aws_ec2_tag" "monitor" {
+  count               = length(var.COMPONENTS)
+  resource_id         = element(aws_spot_instance_request.cheap_worker.*.spot_instance_id, count.index)
+  key                 = "Monitor"
+  value               = "yes"
+}
+
 resource "aws_route53_record" "dns" {
   count               = length(var.COMPONENTS)
   zone_id             = "Z05564902CXVMD9UGH7W1"
