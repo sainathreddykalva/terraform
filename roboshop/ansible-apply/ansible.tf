@@ -1,7 +1,7 @@
 resource "null_resource" "ansible-apply" {
-//  triggers = {
-//    abc = timestamp()
-//  }
+  //  triggers = {
+  //    abc = timestamp()
+  //  }
   count               = length(var.COMPONENTS)
   provisioner "remote-exec" {
 
@@ -16,7 +16,7 @@ resource "null_resource" "ansible-apply" {
       "sudo yum remove ansible -y",
       "sudo rm -rf /usr/lib/python2.7/site-packages/ansible*",
       "sudo pip install ansible",
-      "ansible-pull -i localhost, -U https://DevOps-Batches@dev.azure.com/DevOps-Batches/DevOps56/_git/ansible roboshop-pull.yml -e COMPONENT=${element(var.COMPONENTS, count.index)}"
+      "ansible-pull -i localhost, -U https://github.com/sainathreddykalva/ansible.git roboshop-pull.yml -e COMPONENT=${element(var.COMPONENTS, count.index)}"
     ]
 
   }
