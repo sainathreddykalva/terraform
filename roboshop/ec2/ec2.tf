@@ -18,7 +18,7 @@ resource "null_resource" "wait" {
     abc = timestamp()
   }
 
-  provisioner "local-exec" {
+  provisioner "remote-exec" {
     command = "sleep 60"
   }
 }
