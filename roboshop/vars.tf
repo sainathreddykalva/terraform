@@ -3,5 +3,5 @@
 //}
 
 variable "COMPONENTS" {
-  default = ["shipping","cart"]
+  default = ["shipping","cart","frontend"]
 }
